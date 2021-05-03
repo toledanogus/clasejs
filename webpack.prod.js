@@ -5,9 +5,12 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
-    mode: 'development',
+    mode: 'production',
     optimization: {
         minimizer: [ new OptimizeCssAssetsPlugin()]
+    },
+    output: {
+        filename: 'main.[contentHash].js'
     },
     module: {
         rules: [
@@ -39,7 +42,7 @@ module.exports = {
                 loader: 'html-loader',
                 options: {
                   attributes: false,
-                  minimize: false
+                  minimize: true
                 },
             },
             {
@@ -62,7 +65,7 @@ module.exports = {
             filename: './index.html'
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].[contentHash].css',
+            filename: '[name].css',
             ignoreOrder: false
         }),
         new CopyPlugin([
